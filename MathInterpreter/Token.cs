@@ -4,7 +4,26 @@ namespace MathInterpreter
 {
     public class Token
     {
-        
+        public TokenType tokenType { get; }
+        public double Value { get; }
+
+        public Token(TokenType _tokenType) // This is for binary operators such as +,-,* and / and also for parenthesis as they do not have a value.
+        {
+            tokenType = _tokenType;
+        }
+
+        public Token(TokenType _tokenType, double value) // This is for numbers and there value is stored in the Value property.
+        {
+            tokenType = _tokenType;
+            Value = value;
+        }
+
+        public override string ToString()
+        {
+            if (tokenType == TokenType.NUMBER)
+                return $"{tokenType}: {Value}";
+            return $"{tokenType}";
+        }
     }
 
     public enum TokenType
