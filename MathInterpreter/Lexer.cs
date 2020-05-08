@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MathInterpreter
 {
-    class Lexer
+    public class Lexer
     {
         public string Text { get; set; } // The text the user has provided.
         public int Index {get; set;} // The index of the string.
