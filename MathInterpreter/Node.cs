@@ -33,6 +33,26 @@ namespace MathInterpreter
             nodeA = _nodeA;
         }
 
+        public override bool Equals(object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || ! this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else {
+                Node node = (Node) obj;
+                if (node.nodeType == NodeType.NumberNode)
+                    return Value == node.Value;
+                return nodeType.Equals(node.nodeType) && nodeA.Equals(node.nodeA) && nodeB.Equals(node.nodeB);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public override string ToString()
         {
             if (nodeType == NodeType.NumberNode)

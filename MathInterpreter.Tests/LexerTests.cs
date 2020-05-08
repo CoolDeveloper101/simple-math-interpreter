@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MathInterpreter.Tests
 {
-    public class LexerTest
+    public class LexerTests
     {
 
         [Fact]
