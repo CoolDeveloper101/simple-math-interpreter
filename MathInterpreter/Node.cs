@@ -44,6 +44,10 @@ namespace MathInterpreter
                 Node node = (Node) obj;
                 if (node.nodeType == NodeType.NumberNode)
                     return Value == node.Value;
+                else if (node.nodeType == NodeType.PlusNode || node.nodeType == NodeType.MinusNode)
+                    return nodeType.Equals(node.nodeType) && nodeA.Equals(node.nodeA);
+                else if (node.nodeType == NodeType.EmptyNode)
+                    return nodeType.Equals(node.nodeType);
                 return nodeType.Equals(node.nodeType) && nodeA.Equals(node.nodeA) && nodeB.Equals(node.nodeB);
             }
         }
