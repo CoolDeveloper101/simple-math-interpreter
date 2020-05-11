@@ -103,7 +103,6 @@ namespace MathInterpreter.Tests
                     new Node(NodeType.NumberNode, 56.12)
                 )
             );
-            // (1.0)
             var input = new List<Token>()
             {
                 new Token(TokenType.LPAREN),
@@ -125,7 +124,6 @@ namespace MathInterpreter.Tests
                 new Token(TokenType.NUMBER, 56.12),
                 new Token(TokenType.RPAREN),
             };
-            //(1 - 34.21 * (-21.713)) + ((45.21 / 34.163) ** 56.12)
             var parser = new Parser(input);
             var tree = parser.Parse();
             Assert.Equal(expected, tree);
