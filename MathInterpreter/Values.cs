@@ -25,9 +25,6 @@ namespace MathInterpreter
             }
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() => base.GetHashCode();
     }
 }
