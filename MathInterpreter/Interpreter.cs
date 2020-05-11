@@ -2,7 +2,7 @@ using System;
 
 namespace MathInterpreter
 {
-    class Interpreter
+    public class Interpreter
     {
         public Number Visit(Node node)
         {
