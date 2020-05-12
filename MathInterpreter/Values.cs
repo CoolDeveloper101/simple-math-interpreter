@@ -26,5 +26,21 @@ namespace MathInterpreter
         }
 
         public override int GetHashCode() => base.GetHashCode();
+
+        public static Number operator +(Number number) => number;
+
+        public static Number operator -(Number number) => new Number(-number.Value);
+
+        public static Number operator +(Number number1, Number number2)
+            => new Number(number1.Value + number2.Value);
+        
+        public static Number operator -(Number number1, Number number2)
+            => number1 + (-number2);
+
+        public static Number operator *(Number number1, Number number2)
+            => new Number(number1.Value * number2.Value);
+
+        public static Number operator /(Number number1, Number number2)
+            => new Number(number1.Value / number2.Value);
     }
 }
