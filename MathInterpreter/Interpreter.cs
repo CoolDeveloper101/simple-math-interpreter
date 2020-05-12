@@ -6,24 +6,35 @@ namespace MathInterpreter
     {
         public Number Visit(Node node)
         {
-            if (node.nodeType == NodeType.NumberNode)
-                return new Number(node.Value);
-            else if (node.nodeType == NodeType.AddNode)
-                return VisitAddNode(node);
-            else if (node.nodeType == NodeType.SubtractNode)
-                return VisitSubtractNode(node);
-            else if (node.nodeType == NodeType.MultiplyNode)
-                return VisitMultiplyNode(node);
-            else if (node.nodeType == NodeType.DivideNode)
-                return VisitDivideNode(node);
-            else if (node.nodeType == NodeType.PowerNode)
-                return VisitPowerNode(node);
-            else if (node.nodeType == NodeType.PlusNode)
-                return VisitPlusNode(node);
-            else if (node.nodeType == NodeType.MinusNode)
-                return VisitMinusNode(node);
+            switch (node.nodeType)
+            {
+                case NodeType.NumberNode:
+                    return new Number(node.Value);
+                
+                case NodeType.AddNode:
+                    return VisitAddNode(node);
+                
+                case NodeType.SubtractNode:
+                    return VisitSubtractNode(node);
 
-            throw new Exception("Invalid Node.");
+                case NodeType.MultiplyNode:
+                    return VisitMultiplyNode(node);
+
+                case NodeType.DivideNode:
+                    return VisitDivideNode(node);
+
+                case NodeType.PowerNode:
+                    return VisitPowerNode(node);
+
+                case NodeType.PlusNode:
+                    return VisitPlusNode(node);
+
+                case NodeType.MinusNode:
+                    return VisitMinusNode(node);
+
+                default:
+                    throw new Exception("Invalid Node.");
+            }
         }
 
         public Number VisitAddNode(Node node)
