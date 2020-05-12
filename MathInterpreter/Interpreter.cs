@@ -48,7 +48,9 @@ namespace MathInterpreter
 
         public Number VisitPowerNode(Node node)
         {
-            return new Number(Math.Pow(Visit(node.nodeA).Value , Visit(node.nodeB).Value));
+            // Since we defined an explicit conversion of double to Number, we cast the result to a Number.
+            // We could use an implicit cast, but this improves readability as you can see what is going on.
+            return (Number) Math.Pow(Visit(node.nodeA) , Visit(node.nodeB));
         }
 
         public Number VisitPlusNode(Node node)

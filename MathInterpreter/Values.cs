@@ -42,5 +42,9 @@ namespace MathInterpreter
 
         public static Number operator /(Number number1, Number number2)
             => new Number(number1.Value / number2.Value);
+
+        public static implicit operator double(Number number) => number.Value;
+
+        public static explicit operator Number(double value) => new Number(value);
     }
 }
