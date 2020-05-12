@@ -28,22 +28,22 @@ namespace MathInterpreter
 
         public Number VisitAddNode(Node node)
         {
-            return new Number(Visit(node.nodeA).Value + Visit(node.nodeB).Value);
+            return Visit(node.nodeA) + Visit(node.nodeB);
         }
 
         public Number VisitSubtractNode(Node node)
         {
-            return new Number(Visit(node.nodeA).Value - Visit(node.nodeB).Value);
+            return Visit(node.nodeA) - Visit(node.nodeB);
         }
 
         public Number VisitMultiplyNode(Node node)
         {
-            return new Number(Visit(node.nodeA).Value * Visit(node.nodeB).Value);
+            return Visit(node.nodeA) * Visit(node.nodeB);
         }
 
         public Number VisitDivideNode(Node node)
         {
-            return new Number(Visit(node.nodeA).Value / Visit(node.nodeB).Value);
+            return Visit(node.nodeA) / Visit(node.nodeB);
         }
 
         public Number VisitPowerNode(Node node)
@@ -58,7 +58,7 @@ namespace MathInterpreter
 
         public Number VisitMinusNode(Node node)
         {
-            return new Number(-1 * Visit(node.nodeA).Value);
+            return -Visit(node.nodeA);
         }
 
     }
