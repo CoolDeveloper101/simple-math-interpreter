@@ -27,6 +27,6 @@ To use the math interpreter console, follow the given steps -
 
 1. Install the dotnet core sdk
 2. Clone the repository
-3. Navigate to `<repo_location>/Mathinterpreter.console/` directory in the terminal. (Where <repo_location in> is the directory where you cloned the repo.)
+3. Navigate to `<repo_location>/Mathinterpreter.console/` directory in the terminal. (Where <repo_location> is the directory where you cloned the repo.)
 4. Run the command `dotnet run` in the terminal.
 5. It prompts you for input. Enter any valid mathematical expression as stated above.
