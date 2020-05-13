@@ -23,6 +23,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Test interpreter
+      # We are directly running dotnet test without dotnet build because this automatically builds the code.
       run: dotnet test
       working-directory: './MathInterpreter.Tests/'
     - name: Test console
