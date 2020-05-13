@@ -34,4 +34,5 @@ To use the math interpreter console, follow the given steps -
 ## Integrating with other applications.
 Since the core application is a dotnet standard class library, it is easily portable. Just add a refernce to the MathInterpreter.MathInterpreter.csproj file in your project.
 
+## Contributions
 All contributions are welome!
