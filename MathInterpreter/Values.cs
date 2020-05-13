@@ -34,6 +34,11 @@ namespace MathInterpreter
         public static Number operator +(Number number1, Number number2)
             => new Number(number1.Value + number2.Value);
         
+        // We are doing this because for two numbers a and b
+        // a - b = a + (-b)
+        // We have already defined the - operator for converting the number from positive to negavite or negative to positive.
+        // So when we do this, we are adding the negative of the given number.
+        // This may seem a little vague, so I advise you to try out the code yourself and try to see how it works.
         public static Number operator -(Number number1, Number number2)
             => number1 + (-number2);
 
