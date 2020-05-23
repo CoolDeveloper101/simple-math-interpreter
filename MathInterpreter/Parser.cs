@@ -9,7 +9,7 @@ namespace MathInterpreter
         public int Index {get; set;} // The index of the current token in the list of tokens.
         public string Expression { get; }
 
-        public Parser(List<Token> tokens, string expression)
+        public Parser(List<Token> tokens, string expression="")
         {
             tokens.Add(new Token(TokenType.EOF));
             Tokens = tokens;
@@ -36,7 +36,9 @@ namespace MathInterpreter
 
             if (Current().tokenType != TokenType.EOF)
             {
-                throw new Exception("Invalid Syntax");
+                if (Expression != "")
+                    throw new Exception($"Invalid expression '{Expression}'");
+                throw new Exception($"The expression you have entered is not valid.");
             }
 
             return result;
@@ -109,7 +111,9 @@ namespace MathInterpreter
 
                 if (Current().tokenType != TokenType.RPAREN)
                 {
-                    throw new Exception($"Invalid expression '{Expression}'");
+                    if (Expression != "")
+                        throw new Exception($"Invalid expression '{Expression}'");
+                    throw new Exception($"The expression you have entered is not valid.");
                 }
 
                 Advance();
@@ -131,8 +135,9 @@ namespace MathInterpreter
                 Advance();
                 return new Node(NodeType.MinusNode, Factor());
             }
-
-            throw new Exception($"Invalid expression '{Expression}'");
+            if (Expression != "")
+                throw new Exception($"Invalid expression '{Expression}'");
+            throw new Exception($"The expression you have entered is not valid.");
         }
     }
 }
