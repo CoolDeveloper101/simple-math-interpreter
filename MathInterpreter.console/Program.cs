@@ -18,7 +18,7 @@ namespace MathInterpreter.console
                     string expression = Console.ReadLine();
                     var lexer = new Lexer(expression);
                     var tokens = lexer.GetTokens();
-                    var parser = new Parser(tokens);
+                    var parser = new Parser(tokens, expression);
                     var tree = parser.Parse();
                     if (tree.nodeType != NodeType.EmptyNode)
                     {
@@ -29,7 +29,9 @@ namespace MathInterpreter.console
                 }
                 catch (Exception e)
                 {
-                    Console.Error.WriteLine(e);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Error.WriteLine(e.Message);
+                    Console.ResetColor();
                 }
             }
         }

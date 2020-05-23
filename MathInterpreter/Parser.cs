@@ -7,12 +7,14 @@ namespace MathInterpreter
     {
         public List<Token> Tokens {get; set;} // The list of tokens provided by the lexer.
         public int Index {get; set;} // The index of the current token in the list of tokens.
+        public string Expression { get; }
 
-        public Parser(List<Token> tokens)
+        public Parser(List<Token> tokens, string expression)
         {
             tokens.Add(new Token(TokenType.EOF));
             Tokens = tokens;
             Index = 0;
+            Expression = expression;
         }
 
         public void Advance() // To increment the index of the current token from Parser.Tokens by 1
@@ -107,7 +109,7 @@ namespace MathInterpreter
 
                 if (Current().tokenType != TokenType.RPAREN)
                 {
-                    throw new Exception("Syntax Error");
+                    throw new Exception($"Invalid expression '{Expression}'");
                 }
 
                 Advance();
@@ -130,7 +132,7 @@ namespace MathInterpreter
                 return new Node(NodeType.MinusNode, Factor());
             }
 
-            throw new Exception("Syntax Error");
+            throw new Exception($"Invalid expression '{Expression}'");
         }
     }
 }
