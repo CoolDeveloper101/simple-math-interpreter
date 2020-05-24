@@ -105,7 +105,25 @@ namespace MathInterpreter
                 }
                 else // This means that the current character is not a digit or an operator. So this means it is not a valid character and we raise an error. 
                 {
-                    throw new Exception($"Illegal character {Current()}");
+                    var errorIndex = 0;
+                    var errorPointer = "";
+                    while (errorIndex <= Index) {
+                        if (errorIndex < Index)
+                        {
+                            if (Text[errorIndex] == '\t')
+                                errorPointer += "\t";
+                            else
+                                errorPointer += " ";
+                            errorIndex += 1;
+                        }
+                        else if (errorIndex == Index)
+                        {
+                            errorPointer += "^";
+                            errorIndex += 1;
+                        }
+                    }
+                    string errorTraceback = $"{Text}\n{errorPointer}\nIllegal character '{Current()}'";
+                    throw new Exception(errorTraceback);
                 }
             }
             return tokens;
