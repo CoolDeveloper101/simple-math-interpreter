@@ -7,17 +7,29 @@ namespace MathInterpreter
         public TokenType tokenType { get; }
         public double Value { get; }
 
-        public Token(TokenType _tokenType) // This is for binary operators such as +,-,* and / and also for parenthesis as they do not have a value.
+        /// <summary>
+        /// This is for binary operators such as +,-,* and / and also for parenthesis as they do not have a value.
+        /// </summary>
+        /// <param name="_tokenType"></param>
+        public Token(TokenType _tokenType)
         {
             tokenType = _tokenType;
         }
 
-        public Token(TokenType _tokenType, double value) // This is for numbers and there value is stored in the Value property.
+        /// <summary>
+        /// This is for numbers and there value is stored in the Value property.
+        /// </summary>
+        /// <param name="_tokenType"></param>
+        /// <param name="value"></param>
+        public Token(TokenType _tokenType, double value)
         {
             tokenType = _tokenType;
             Value = value;
         }
 
+        /// <summary>
+        /// Returns a string representation of the token.
+        /// </summary>
         public override string ToString()
         {
             if (tokenType == TokenType.NUMBER)
@@ -25,6 +37,11 @@ namespace MathInterpreter
             return $"{tokenType}";
         }
 
+        /// <summary>
+        /// Used to check if an object is equal to the current tokens.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>The a boolean after checking whether an object is equal or not.</returns>
         public override bool Equals(object obj)
         {
             //Check for null and compare run-time types.
@@ -42,16 +59,46 @@ namespace MathInterpreter
 
     }
 
+    /// <summary>
+    /// This enum specifies the types of values that the lexer can handle.
+    /// </summary>
     public enum TokenType
     {
-        NUMBER, // The number token type
-        PLUS, // The '+' operator will have the type TokenType.PLUS
-        MINUS, // The '-' operator will have the type TokenType.MINUS
-        MULTIPLY, // The '*' operator will have the type TokenType.MULTIPLY
-        DIVIDE, // The '/' operator will have the type TokenType.DIVIDE
-        POWER, // The '**' operator will have the type TokenType.POWER
-        LPAREN, // The '(' operator will have the type TokenType.LPAREN
-        RPAREN, // The ')' operator will have the type TokenType.RPAREN
+        /// <summary>
+        /// The number token type. This is the token type used for numbers.
+        /// </summary>
+        NUMBER,
+        /// <summary>
+        /// The '+' operator will have the type TokenType.PLUS
+        /// </summary>
+        PLUS,
+        /// <summary>
+        /// The '-' operator will have the type TokenType.MINUS
+        /// </summary>
+        MINUS,
+        /// <summary>
+        /// The '*' operator will have the type TokenType.MULTIPLY
+        /// </summary>
+        MULTIPLY,
+        /// <summary>
+        /// The '/' operator will have the type TokenType.DIVIDE
+        /// </summary>
+        DIVIDE,
+        /// <summary>
+        /// The '**' operator will have the type TokenType.POWER
+        /// </summary>
+        POWER,
+        /// <summary>
+        /// The '(' operator will have the type TokenType.LPAREN
+        /// </summary>
+        LPAREN,
+        /// <summary>
+        /// The ')' operator will have the type TokenType.RPAREN
+        /// </summary>
+        RPAREN,
+        /// <summary>
+        /// This is not actually an operator. This will be used by the parser to ckeck whether it is at the of the list of tokens provided by lexer.
+        /// </summary>
         EOF,
     }
 
