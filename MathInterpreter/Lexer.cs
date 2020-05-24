@@ -5,26 +5,55 @@ namespace MathInterpreter
 {
     public class Lexer
     {
-        public string Text { get; set; } // The text the user has provided.
-        public int Index {get; set;} // The index of the string.
-        public const string WHITESPACE = " \t\n"; // Defining what kind of characters to skip
+        /// <summary>
+        /// The text provided in the contructor.
+        /// </summary>
+        public string Text { get; set; }
+        /// <summary>
+        /// The current index of Lexer.Text
+        /// </summary>
+        /// <remarks>
+        /// Basically this property tells what character to access by indexing.
+        /// </remarks>
+        public int Index { get; set; }
+        /// <summary>
+        /// Defining what kind of characters to skip.
+        /// </summary>
+        public const string WHITESPACE = " \t\n";
+        /// <summary>
+        /// These are the digits that numbers are comprised of.
+        /// </summary>
         public const string DIGITS = "0123456789";
 
+        /// <summary>
+        /// The lexer takes a string as input.
+        /// </summary>
+        /// <param name="text"></param>
         public Lexer(string text)
         {
             Text = text + "\0"; // Assigning the Text property to the text argument provided by the user and also adding the null character to it so that we can keep a check of whether we are at the end of the file.
         }
 
-        public void Advance() // This method adds 1 to the index variable so that the Current method can return the next character from the property Text.
+        /// <summary>
+        /// This method adds 1 to the Lexer.Index variable so that the Lexer.Current method can return the next character from the property Lexer.Text.
+        /// </summary>
+        public void Advance()
         {
             Index += 1;
         }
 
-        public string Current() // This returns the character which is at the Index variable.
+        /// <summary>
+        /// The current character the lexer is at.
+        /// </summary>
+        /// <returns>This returns the character which is at the Index variable.</returns>
+        public string Current()
         {
             return $"{Text[Index]}";
         }
 
+        /// <summary>
+        /// This method is actually used to get the tokens from the string provided is the constructor.
+        /// </summary>
         public List<Token> GetTokens()
         {
             List<Token> tokens = new List<Token>();
@@ -74,7 +103,7 @@ namespace MathInterpreter
                     Advance();
                     tokens.Add(new Token(TokenType.RPAREN));
                 }
-                else // This means that the current character is not a digit or an operator. So we raise an error that it is not a valid character. 
+                else // This means that the current character is not a digit or an operator. So this means it is not a valid character and we raise an error. 
                 {
                     throw new Exception($"Illegal character {Current()}");
                 }
@@ -82,7 +111,12 @@ namespace MathInterpreter
             return tokens;
         }
 
-        public Token GetNumber() // The GetNumber method returns a Token of type TokenType.NUMBER . It converts the string to number token.
+        /// <summary>
+        /// The Lexer.GetNumber method returns a Token of type TokenType.NUMBER.
+        /// It is basically used to convert a part of the text input to a token.
+        /// It continues till it encounters a character which is not in Lexer.DIGITS or a '.'
+        /// </summary>
+        public Token GetNumber()
         {
             int decimal_point_count = 0;
             if (Current() == ".")
