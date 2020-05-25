@@ -122,7 +122,7 @@ namespace MathInterpreter
                             errorIndex += 1;
                         }
                     }
-                    string errorTraceback = $"{Text}\n{errorPointer}\nIllegal character '{Current()}'";
+                    string errorTraceback = $"Error:\n{Text}\n{errorPointer}\nIllegal character '{Current()}'";
                     throw new Exception(errorTraceback);
                 }
             }
