@@ -4,7 +4,13 @@ namespace MathInterpreter
 {
     public class Token
     {
+        /// <summary>
+        /// The type of the token.
+        /// </summary>
         public TokenType tokenType { get; }
+        /// <summary>
+        /// The value of the token if its type is TokenType.NUMBER
+        /// </summary>
         public double Value { get; }
 
         /// <summary>

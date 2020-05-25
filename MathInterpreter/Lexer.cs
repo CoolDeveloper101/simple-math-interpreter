@@ -130,10 +130,10 @@ namespace MathInterpreter
         }
 
         /// <summary>
-        /// The Lexer.GetNumber method returns a Token of type TokenType.NUMBER.
         /// It is basically used to convert a part of the text input to a token.
         /// It continues till it encounters a character which is not in Lexer.DIGITS or a '.'
         /// </summary>
+        /// <returns>The Lexer.GetNumber method returns a Token of type TokenType.NUMBER.</returns>
         public Token GetNumber()
         {
             int decimal_point_count = 0;
