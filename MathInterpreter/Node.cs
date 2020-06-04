@@ -100,23 +100,18 @@ namespace MathInterpreter
         /// <returns>A string representation of the current node.</returns>
         public override string ToString()
         {
-            if (nodeType == NodeType.NumberNode)
-                return $"{Value}";
-            else if (nodeType == NodeType.AddNode)
-                return $"({nodeA} + {nodeB})";
-            else if (nodeType == NodeType.SubtractNode)
-                return $"({nodeA} - {nodeB})";
-            else if (nodeType == NodeType.MultiplyNode)
-                return $"({nodeA} * {nodeB})";
-            else if (nodeType == NodeType.DivideNode)
-                return $"({nodeA} / {nodeB})";
-            else if (nodeType == NodeType.PowerNode)
-                return $"({nodeA} ** {nodeB})";
-            else if (nodeType == NodeType.PlusNode)
-                return $"(+{nodeA})";
-            else if (nodeType == NodeType.MinusNode)
-                return $"(-{nodeA})";
-            return $"()";
+            switch (nodeType)
+            {
+                case NodeType.NumberNode: return $"{Value}";
+                case NodeType.PlusNode: return $"(+{nodeA})";
+                case NodeType.MinusNode: return $"(-{nodeA})";
+                case NodeType.AddNode: return $"({nodeA} + {nodeB})";
+                case NodeType.SubtractNode: return $"({nodeA} - {nodeB})";
+                case NodeType.MultiplyNode: return $"({nodeA} * {nodeB})";
+                case NodeType.DivideNode: return $"({nodeA} / {nodeB})";
+                case NodeType.PowerNode: return $"({nodeA} ** {nodeB})";
+                default: return "()";
+            }
         }
     }
 
