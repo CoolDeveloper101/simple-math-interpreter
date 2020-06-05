@@ -1,13 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathInterpreter", "MathInterpreter\MathInterpreter.csproj", "{D8464E6A-3AC1-4765-9709-C93812DC79DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathInterpreter", "MathInterpreter\MathInterpreter.csproj", "{D8464E6A-3AC1-4765-9709-C93812DC79DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathInterpreter.Tests", "MathInterpreter.Tests\MathInterpreter.Tests.csproj", "{A7736A9D-565C-47E4-AE65-C8C53C16767B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathInterpreter.Tests", "MathInterpreter.Tests\MathInterpreter.Tests.csproj", "{A7736A9D-565C-47E4-AE65-C8C53C16767B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathInterpreter.console", "MathInterpreter.console\MathInterpreter.console.csproj", "{D33927F8-D06E-4F04-85A0-0EF1D5968E23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathInterpreter.console", "MathInterpreter.console\MathInterpreter.console.csproj", "{D33927F8-D06E-4F04-85A0-0EF1D5968E23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B030F83D-F97A-4C7D-B21F-F0E49AB3E418}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D8464E6A-3AC1-4765-9709-C93812DC79DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +63,11 @@ Global
 		{D33927F8-D06E-4F04-85A0-0EF1D5968E23}.Release|x64.Build.0 = Release|Any CPU
 		{D33927F8-D06E-4F04-85A0-0EF1D5968E23}.Release|x86.ActiveCfg = Release|Any CPU
 		{D33927F8-D06E-4F04-85A0-0EF1D5968E23}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7DC7EF0-801B-44F7-BA46-12F3C02FB68F}
 	EndGlobalSection
 EndGlobal
