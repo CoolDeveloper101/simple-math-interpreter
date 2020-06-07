@@ -22,6 +22,22 @@ The interpreter supports the following oprators in the given precedence-<br>
 
 It supports positive as well as negative numbers and also supports decimal numbers.
 
+**Note**: Some of you might be wondering why there is not underroot operator.
+After much consideration, I decided that it was really unnecessary.
+Well you can just use this property -
+number<sup>1/x</sup> is equal to x<sup>th</sup> root of the number.
+
+For example:
+
+4<sup>1/2</sup> is equal to square root of 4 which is 2
+27<sup>1/3</sup> is equal to cube root of 4 which is 3
+and so on...
+
+So, to perform the under root operation in the calualator for any number, lets say 144-
+`>>> 144 ** (1/2)`
+The parentheses are important as the power operator is upper in the operator hierarchy. If the don't include them the result would become-
+`>>> (144 ** 1) / 2`
+
 ## Use the console.
 To use the math interpreter console, follow the given steps -
 
