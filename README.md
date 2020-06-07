@@ -30,7 +30,7 @@ number<sup>1/x</sup> is equal to x<sup>th</sup> root of the number.
 For example:
 
 4<sup>1/2</sup> is equal to square root of 4 which is 2<br>
-27<sup>1/3</sup> is equal to cube root of 3 which is 3<br>
+27<sup>1/3</sup> is equal to cube root of 27 which is 3<br>
 and so on...
 
 So, to perform the under root operation in the calualator for any number, lets say 144-
