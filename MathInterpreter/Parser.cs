@@ -22,16 +22,28 @@ namespace MathInterpreter
             Expression = expression;
         }
 
-        public void Advance() // To increment the index of the current token from Parser.Tokens by 1
+        /// <summary>
+        /// To increment the index of the current token from Parser.Tokens by 1
+        /// </summary>
+        public void Advance()
         {
             Index += 1;
         }
 
-        public Token Current() // To return the token at index Parser.Index from Parser.Tokens
+        /// <summary>
+        /// To return the token at index Parser.Index from Parser.Tokens
+        /// </summary>
+        /// <returns></returns>
+        public Token Current()
         {
             return Tokens[Index];
         }
 
+
+        /// <summary>
+        /// This is the actual method which is used to convert a method to a list of tokens to a Node.
+        /// </summary>
+        /// <returns></returns>
         public Node Parse()
         {
             if (!Tokens.Contains(new Token(TokenType.EOF)))
