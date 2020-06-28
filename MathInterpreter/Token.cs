@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace MathInterpreter
+﻿namespace MathInterpreter
 {
     public class Token
     {
         /// <summary>
         /// The type of the token.
         /// </summary>
-        public TokenType tokenType { get; }
+        public TokenType Type { get; }
         /// <summary>
         /// The value of the token if its type is TokenType.NUMBER
         /// </summary>
@@ -19,7 +17,7 @@ namespace MathInterpreter
         /// <param name="_tokenType"></param>
         public Token(TokenType _tokenType)
         {
-            tokenType = _tokenType;
+            Type = _tokenType;
         }
 
         /// <summary>
@@ -29,7 +27,7 @@ namespace MathInterpreter
         /// <param name="value"></param>
         public Token(TokenType _tokenType, double value)
         {
-            tokenType = _tokenType;
+            Type = _tokenType;
             Value = value;
         }
 
@@ -38,9 +36,9 @@ namespace MathInterpreter
         /// </summary>
         public override string ToString()
         {
-            if (tokenType == TokenType.NUMBER)
-                return $"{tokenType}: {Value}";
-            return $"{tokenType}";
+            if (Type == TokenType.NUMBER)
+                return $"{Type}: {Value}";
+            return $"{Type}";
         }
 
         /// <summary>
@@ -57,7 +55,7 @@ namespace MathInterpreter
             }
             else {
                 Token tok = (Token) obj;
-                return (tokenType == tok.tokenType) && (Value == tok.Value);
+                return (Type == tok.Type) && (Value == tok.Value);
             }
         }
 

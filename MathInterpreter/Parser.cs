@@ -29,12 +29,12 @@ namespace MathInterpreter
 
         public Node Parse()
         {
-            if (Current().tokenType == TokenType.EOF) // Checking if the list of tokens is empty. If it is empty, Parse returns an EmptyNode.
+            if (Current().Type == TokenType.EOF) // Checking if the list of tokens is empty. If it is empty, Parse returns an EmptyNode.
                 return new Node(NodeType.EmptyNode);
 
             Node result = Expr();
 
-            if (Current().tokenType != TokenType.EOF)
+            if (Current().Type != TokenType.EOF)
             {
                 if (Expression != "")
                     throw new Exception($"Invalid expression '{Expression}'");
@@ -48,14 +48,14 @@ namespace MathInterpreter
         {
             Node result = Term();
 
-            while (Current().tokenType != TokenType.EOF && (Current().tokenType == TokenType.PLUS || Current().tokenType == TokenType.MINUS))
+            while (Current().Type != TokenType.EOF && (Current().Type == TokenType.PLUS || Current().Type == TokenType.MINUS))
             {
-                if (Current().tokenType == TokenType.PLUS)
+                if (Current().Type == TokenType.PLUS)
                 {
                     Advance();
                     result = new Node(NodeType.AddNode, result, Term());
                 }
-                else if (Current().tokenType == TokenType.MINUS)
+                else if (Current().Type == TokenType.MINUS)
                 {
                     Advance();
                     result = new Node(NodeType.SubtractNode, result, Term());
@@ -69,14 +69,14 @@ namespace MathInterpreter
         {
             Node result = Exponent();
 
-            while (Current().tokenType != TokenType.EOF && (Current().tokenType == TokenType.MULTIPLY || Current().tokenType == TokenType.DIVIDE))
+            while (Current().Type != TokenType.EOF && (Current().Type == TokenType.MULTIPLY || Current().Type == TokenType.DIVIDE))
             {
-                if (Current().tokenType == TokenType.MULTIPLY)
+                if (Current().Type == TokenType.MULTIPLY)
                 {
                     Advance();
                     result = new Node(NodeType.MultiplyNode, result, Exponent());
                 }
-                else if (Current().tokenType == TokenType.DIVIDE)
+                else if (Current().Type == TokenType.DIVIDE)
                 {
                     Advance();
                     result = new Node(NodeType.DivideNode, result, Exponent());
@@ -89,9 +89,9 @@ namespace MathInterpreter
         {
             Node result = Factor();
 
-            while (Current().tokenType != TokenType.EOF && (Current().tokenType == TokenType.POWER))
+            while (Current().Type != TokenType.EOF && (Current().Type == TokenType.POWER))
             {
-                if (Current().tokenType == TokenType.POWER)
+                if (Current().Type == TokenType.POWER)
                 {
                     Advance();
                     result = new Node(NodeType.PowerNode, result, Factor());
@@ -104,12 +104,12 @@ namespace MathInterpreter
         public Node Factor()
         {
             Token current = Current();
-            if (current.tokenType == TokenType.LPAREN)
+            if (current.Type == TokenType.LPAREN)
             {
                 Advance();
                 Node result = Expr();
 
-                if (Current().tokenType != TokenType.RPAREN)
+                if (Current().Type != TokenType.RPAREN)
                 {
                     if (Expression != "")
                         throw new Exception($"Invalid expression '{Expression}'");
@@ -120,17 +120,17 @@ namespace MathInterpreter
                 return result;
 
             }
-            else if (current.tokenType == TokenType.NUMBER)
+            else if (current.Type == TokenType.NUMBER)
             {
                 Advance();
                 return new Node(NodeType.NumberNode, current.Value);
             }
-            else if (current.tokenType == TokenType.PLUS)
+            else if (current.Type == TokenType.PLUS)
             {
                 Advance();
                 return new Node(NodeType.PlusNode, Factor());
             }
-            else if (current.tokenType == TokenType.MINUS)
+            else if (current.Type == TokenType.MINUS)
             {
                 Advance();
                 return new Node(NodeType.MinusNode, Factor());
