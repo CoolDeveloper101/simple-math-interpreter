@@ -22,7 +22,7 @@ namespace MathInterpreter.console
                         var tokens = lexer.GetTokens();
                         var parser = new Parser(tokens, expression);
                         var tree = parser.Parse();
-                        if (tree.nodeType != NodeType.EmptyNode)
+                        if (tree.NodeType != NodeType.EmptyNode)
                         {
                             var interpreter = new Interpreter();
                             var result = interpreter.Visit(tree);
@@ -58,7 +58,7 @@ namespace MathInterpreter.console
                     var tokens = lexer.GetTokens();
                     var parser = new Parser(tokens, expression);
                     var tree = parser.Parse();
-                    if (tree.nodeType != NodeType.EmptyNode)
+                    if (tree.NodeType != NodeType.EmptyNode)
                     {
                         var interpreter = new Interpreter();
                         var result = interpreter.Visit(tree);

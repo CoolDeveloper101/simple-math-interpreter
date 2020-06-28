@@ -10,62 +10,62 @@ namespace MathInterpreter
         /// <summary>
         /// The type of the node
         /// </summary>
-        public NodeType nodeType {get; }
+        public readonly NodeType NodeType;
         /// <summary>
-        /// The value of the node if this.nodeType is a NumberNode
+        /// The value of the node if this.NodeType is a NumberNode
         /// </summary>
-        public double Value {get; }
+        public readonly double Value;
         /// <summary>
-        /// The first node if the this.nodeType is an operation such as NodeType.Addnode which has two parts.
+        /// The first node if the this.NodeType is an operation such as NodeType.Addnode which has two parts.
         /// </summary>
-        public Node nodeA {get; }
+        public readonly Node NodeA;
         /// <summary>
-        /// The second node if the this.nodeType is an operation such as NodeType.Addnode which has two parts.
+        /// The second node if the this.NodeType is an operation such as NodeType.Addnode which has two parts.
         /// </summary>
-        public Node nodeB {get; }
+        public readonly Node NodeB;
 
         /// <summary>
-        /// This is used for NumberNodes as they only have the nodeType and the Value
+        /// This is used for NumberNodes as they only have the NodeType and the Value
         /// </summary>
-        /// <param name="_nodeType"></param>
+        /// <param name="nodeType"></param>
         /// <param name="value"></param>
-        public Node(NodeType _nodeType, double value)
+        public Node(NodeType nodeType, double value)
         {
-            nodeType = _nodeType;
+            this.NodeType = nodeType;
             Value = value;
         }
 
         /// <summary>
-        /// This constructor is used for operators since they have a nodeType and the values to the left and right of the nodeType.
+        /// This constructor is used for operators since they have a NodeType and the values to the left and right of the NodeType.
         /// </summary>
-        /// <param name="_nodeType"></param>
-        /// <param name="_nodeA"></param>
-        /// <param name="_nodeB"></param>
-        public Node(NodeType _nodeType, Node _nodeA, Node _nodeB)
+        /// <param name="nodeType"></param>
+        /// <param name="nodeA"></param>
+        /// <param name="nodeB"></param>
+        public Node(NodeType nodeType, Node nodeA, Node nodeB)
         {
-            nodeType = _nodeType;
-            nodeA = _nodeA;
-            nodeB = _nodeB;
+            this.NodeType = nodeType;
+            NodeA = nodeA;
+            NodeB = nodeB;
         }
 
         /// <summary>
         /// This is used for unary operators that have only one input to their right side.
         /// </summary>
-        /// <param name="_nodeType"></param>
-        /// <param name="_nodeA"></param>
-        public Node(NodeType _nodeType, Node _nodeA)
+        /// <param name="nodeType"></param>
+        /// <param name="nodeA"></param>
+        public Node(NodeType nodeType, Node nodeA)
         {
-            nodeType = _nodeType;
-            nodeA = _nodeA;
+            this.NodeType = nodeType;
+            NodeA = nodeA;
         }
 
         /// <summary>
         /// This is used for empty nodes when the list of tokens is empty.
         /// </summary>
-        /// <param name="_nodeType"></param>
-        public Node(NodeType _nodeType)
+        /// <param name="nodeType"></param>
+        public Node(NodeType nodeType)
         {
-            nodeType = _nodeType;
+            this.NodeType = nodeType;
         }
 
         /// <summary>
@@ -82,13 +82,13 @@ namespace MathInterpreter
             }
             else {
                 Node node = (Node) obj;
-                if (node.nodeType == NodeType.NumberNode)
+                if (node.NodeType == NodeType.NumberNode)
                     return Value == node.Value;
-                else if (node.nodeType == NodeType.PlusNode || node.nodeType == NodeType.MinusNode)
-                    return nodeType.Equals(node.nodeType) && nodeA.Equals(node.nodeA);
-                else if (node.nodeType == NodeType.EmptyNode)
-                    return nodeType.Equals(node.nodeType);
-                return nodeType.Equals(node.nodeType) && nodeA.Equals(node.nodeA) && nodeB.Equals(node.nodeB);
+                else if (node.NodeType == NodeType.PlusNode || node.NodeType == NodeType.MinusNode)
+                    return NodeType.Equals(node.NodeType) && NodeA.Equals(node.NodeA);
+                else if (node.NodeType == NodeType.EmptyNode)
+                    return NodeType.Equals(node.NodeType);
+                return NodeType.Equals(node.NodeType) && NodeA.Equals(node.NodeA) && NodeB.Equals(node.NodeB);
             }
         }
 
@@ -100,16 +100,16 @@ namespace MathInterpreter
         /// <returns>A string representation of the current node.</returns>
         public override string ToString()
         {
-            switch (nodeType)
+            switch (this.NodeType)
             {
                 case NodeType.NumberNode: return $"{Value}";
-                case NodeType.PlusNode: return $"(+{nodeA})";
-                case NodeType.MinusNode: return $"(-{nodeA})";
-                case NodeType.AddNode: return $"({nodeA} + {nodeB})";
-                case NodeType.SubtractNode: return $"({nodeA} - {nodeB})";
-                case NodeType.MultiplyNode: return $"({nodeA} * {nodeB})";
-                case NodeType.DivideNode: return $"({nodeA} / {nodeB})";
-                case NodeType.PowerNode: return $"({nodeA} ** {nodeB})";
+                case NodeType.PlusNode: return $"(+{NodeA})";
+                case NodeType.MinusNode: return $"(-{NodeA})";
+                case NodeType.AddNode: return $"({NodeA} + {NodeB})";
+                case NodeType.SubtractNode: return $"({NodeA} - {NodeB})";
+                case NodeType.MultiplyNode: return $"({NodeA} * {NodeB})";
+                case NodeType.DivideNode: return $"({NodeA} / {NodeB})";
+                case NodeType.PowerNode: return $"({NodeA} ** {NodeB})";
                 default: return "()";
             }
         }

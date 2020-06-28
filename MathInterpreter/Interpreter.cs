@@ -6,7 +6,7 @@ namespace MathInterpreter
     {
         public Number Visit(Node node)
         {
-            switch (node.nodeType)
+            switch (node.NodeType)
             {
                 case NodeType.NumberNode:
                     return new Number(node.Value);
@@ -39,39 +39,39 @@ namespace MathInterpreter
 
         public Number VisitAddNode(Node node)
         {
-            return Visit(node.nodeA) + Visit(node.nodeB);
+            return Visit(node.NodeA) + Visit(node.NodeB);
         }
 
         public Number VisitSubtractNode(Node node)
         {
-            return Visit(node.nodeA) - Visit(node.nodeB);
+            return Visit(node.NodeA) - Visit(node.NodeB);
         }
 
         public Number VisitMultiplyNode(Node node)
         {
-            return Visit(node.nodeA) * Visit(node.nodeB);
+            return Visit(node.NodeA) * Visit(node.NodeB);
         }
 
         public Number VisitDivideNode(Node node)
         {
-            return Visit(node.nodeA) / Visit(node.nodeB);
+            return Visit(node.NodeA) / Visit(node.NodeB);
         }
 
         public Number VisitPowerNode(Node node)
         {
             // Since we defined an explicit conversion of double to Number, we cast the result to a Number.
             // We could use an implicit cast, but this improves readability as you can see what is going on.
-            return (Number) Math.Pow(Visit(node.nodeA) , Visit(node.nodeB));
+            return (Number) Math.Pow(Visit(node.NodeA) , Visit(node.NodeB));
         }
 
         public Number VisitPlusNode(Node node)
         {
-            return Visit(node.nodeA);
+            return Visit(node.NodeA);
         }
 
         public Number VisitMinusNode(Node node)
         {
-            return -Visit(node.nodeA);
+            return -Visit(node.NodeA);
         }
 
     }
