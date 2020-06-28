@@ -5,29 +5,29 @@
         /// <summary>
         /// The type of the token.
         /// </summary>
-        public TokenType Type { get; }
+        public readonly TokenType Type;
         /// <summary>
         /// The value of the token if its type is TokenType.NUMBER
         /// </summary>
-        public double Value { get; }
+        public readonly double Value;
 
         /// <summary>
         /// This is for binary operators such as +,-,* and / and also for parenthesis as they do not have a value.
         /// </summary>
-        /// <param name="_tokenType"></param>
-        public Token(TokenType _tokenType)
+        /// <param name="tokenType"></param>
+        public Token(TokenType tokenType)
         {
-            Type = _tokenType;
+            Type = tokenType;
         }
 
         /// <summary>
         /// This is for numbers and there value is stored in the Value property.
         /// </summary>
-        /// <param name="_tokenType"></param>
+        /// <param name="tokenType"></param>
         /// <param name="value"></param>
-        public Token(TokenType _tokenType, double value)
+        public Token(TokenType tokenType, double value)
         {
-            Type = _tokenType;
+            Type = tokenType;
             Value = value;
         }
 
