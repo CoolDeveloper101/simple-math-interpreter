@@ -5,9 +5,15 @@ namespace MathInterpreter
 {
     public class Parser
     {
-        public List<Token> Tokens {get; set;} // The list of tokens provided by the lexer.
-        public int Index {get; set;} // The index of the current token in the list of tokens.
-        public string Expression { get; }
+        /// <summary>
+        /// The list of tokens provided by the lexer.
+        /// </summary>
+        public readonly List<Token> Tokens;
+        /// <summary>
+        /// The index of the current token in the list of tokens.
+        /// </summary>
+        public int Index {get; set;}
+        private readonly string Expression;
 
         public Parser(List<Token> tokens, string expression="")
         {
