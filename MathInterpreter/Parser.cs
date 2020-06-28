@@ -34,6 +34,9 @@ namespace MathInterpreter
 
         public Node Parse()
         {
+            if (!Tokens.Contains(new Token(TokenType.EOF)))
+                throw new Exception("The list is not valid. It does not contain an EOF token.");
+
             if (Current().Type == TokenType.EOF) // Checking if the list of tokens is empty. If it is empty, Parse returns an EmptyNode.
                 return new Node(NodeType.EmptyNode);
 
