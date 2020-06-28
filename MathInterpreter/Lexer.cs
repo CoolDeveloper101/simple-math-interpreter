@@ -126,6 +126,7 @@ namespace MathInterpreter
                     throw new Exception(errorTraceback);
                 }
             }
+            tokens.Add(new Token(TokenType.EOF));
             return tokens;
         }
 

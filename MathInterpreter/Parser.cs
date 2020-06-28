@@ -17,7 +17,6 @@ namespace MathInterpreter
 
         public Parser(List<Token> tokens, string expression="")
         {
-            tokens.Add(new Token(TokenType.EOF));
             Tokens = tokens;
             Index = 0;
             Expression = expression;

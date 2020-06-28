@@ -15,7 +15,7 @@ namespace MathInterpreter.Tests
             (
                 NodeType.EmptyNode
             );
-            var parser = new Parser(new List<Token>(){});
+            var parser = new Parser(new List<Token>(){ new Token(TokenType.EOF) });
             var tree = parser.Parse();
             Assert.Equal(expected, tree);
         }
@@ -31,6 +31,7 @@ namespace MathInterpreter.Tests
             var input = new List<Token>()
             {
                 new Token(TokenType.NUMBER, 51.2),
+                new Token(TokenType.EOF),
             };
             var parser = new Parser(input);
             var tree = parser.Parse();
@@ -56,6 +57,7 @@ namespace MathInterpreter.Tests
                 new Token(TokenType.NUMBER, num1),
                 new Token(inputType),
                 new Token(TokenType.NUMBER, num2),
+                new Token(TokenType.EOF),
             };
             var parser = new Parser(input);
             var tree = parser.Parse();
@@ -71,7 +73,8 @@ namespace MathInterpreter.Tests
             var input = new List<Token>()
             {
                 new Token(inputType),
-                new Token(TokenType.NUMBER, value)
+                new Token(TokenType.NUMBER, value),
+                new Token(TokenType.EOF),
             };
             var parser = new Parser(input);
             var tree = parser.Parse();
@@ -123,6 +126,7 @@ namespace MathInterpreter.Tests
                 new Token(TokenType.POWER),
                 new Token(TokenType.NUMBER, 56.12),
                 new Token(TokenType.RPAREN),
+                new Token(TokenType.EOF),
             };
             var parser = new Parser(input);
             var tree = parser.Parse();

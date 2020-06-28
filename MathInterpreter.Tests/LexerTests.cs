@@ -11,7 +11,7 @@ namespace MathInterpreter.Tests
         [Fact]
         public void TestEmpty()
         {
-            var expexctedTokens = new List<Token>();
+            var expexctedTokens = new List<Token>() { new Token(TokenType.EOF)};
             var lexer = new Lexer("");
             var tokens = lexer.GetTokens();
             Assert.Equal(expexctedTokens, tokens);
@@ -20,7 +20,7 @@ namespace MathInterpreter.Tests
         [Fact]
         public void TestWhiteSpace()
         {
-            var expexctedTokens = new List<Token>();
+            var expexctedTokens = new List<Token>() { new Token(TokenType.EOF) };
             var lexer = new Lexer(" \t\n  \t\t\n\n");
             var tokens = lexer.GetTokens();
             Assert.Equal(expexctedTokens, tokens);
@@ -36,6 +36,7 @@ namespace MathInterpreter.Tests
                 new Token(TokenType.NUMBER, 123.0),
                 new Token(TokenType.NUMBER, 0.456),
                 new Token(TokenType.NUMBER, 0.0),
+                new Token(TokenType.EOF),
             };
 
             var lexer = new Lexer("123 123.456 123. .456 .");
@@ -52,6 +53,7 @@ namespace MathInterpreter.Tests
 			    new Token(TokenType.MINUS),
 			    new Token(TokenType.MULTIPLY),
 			    new Token(TokenType.DIVIDE),
+                new Token(TokenType.EOF),
             };
             var lexer = new Lexer("+-*/");
             var tokens = lexer.GetTokens();
@@ -66,6 +68,7 @@ namespace MathInterpreter.Tests
             {
                 new Token(TokenType.LPAREN),
 			    new Token(TokenType.RPAREN),
+                new Token(TokenType.EOF),
             };
             var lexer = new Lexer("()");
             var tokens = lexer.GetTokens();
@@ -90,6 +93,7 @@ namespace MathInterpreter.Tests
 			    new Token(TokenType.NUMBER, 51.0),
                 new Token(TokenType.POWER),
 			    new Token(TokenType.NUMBER, 2.0),
+                new Token(TokenType.EOF),
             };
             var lexer = new Lexer("27 + (43 / 36 - 48) * 51 ** 2");
             var tokens = lexer.GetTokens();
