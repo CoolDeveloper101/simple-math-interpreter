@@ -8,7 +8,7 @@ namespace MathInterpreter
         /// <summary>
         /// The text provided in the contructor.
         /// </summary>
-        public string Text { get; set; }
+        public readonly string Text;
         /// <summary>
         /// The current index of Lexer.Text
         /// </summary>
