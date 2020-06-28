@@ -35,21 +35,14 @@ namespace MathInterpreter
         }
 
         /// <summary>
-        /// This method adds 1 to the Lexer.Index variable so that the Lexer.Current method can return the next character from the property Lexer.Text.
+        /// The current character at which the lexer is.
         /// </summary>
-        public void Advance()
-        {
-            Index += 1;
-        }
+        public string Current => $"{Text[Index]}";
 
         /// <summary>
-        /// The current character the lexer is at.
+        /// This method adds 1 to the Lexer.Index variable so that the Lexer.Current method can return the next character from the property Lexer.Text.
         /// </summary>
-        /// <returns>This returns the character which is at the Index variable.</returns>
-        public string Current()
-        {
-            return $"{Text[Index]}";
-        }
+        public void Advance() => Index += 1;
 
         /// <summary>
         /// This method is actually used to get the tokens from the string provided is the constructor.
@@ -58,29 +51,29 @@ namespace MathInterpreter
         {
             List<Token> tokens = new List<Token>();
 
-            while (Current() != "\0") // Checking whether the current character is the null character which means we are at the end o fthe input.
+            while (Current!= "\0") // Checking whether the current character is the null character which means we are at the end o fthe input.
             {
-                if (WHITESPACE.Contains(Current())) // Checking if the current token is space, tab or newline
+                if (WHITESPACE.Contains(Current)) // Checking if the current token is space, tab or newline
                     Advance(); // If the current token is in whitespace, we advance.
 
-                else if (DIGITS.Contains(Current()) || Current() == ".") // We are checking if the current character is a digit.
+                else if (DIGITS.Contains(Current) || Current== ".") // We are checking if the current character is a digit.
                 {
                     tokens.Add(GetNumber()); // If the current character is a digit, we call a method called GetNumber which converts the string to a NumberToken starting from the current character to the charcter which is not a digit or decimal point.
                 }
-                else if (Current() == "+") // Checking if the current character is a '+' operator. If it is, we advance and add a Token of TokenType.PLUS
+                else if (Current== "+") // Checking if the current character is a '+' operator. If it is, we advance and add a Token of TokenType.PLUS
                 {
                     Advance();
                     tokens.Add(new Token(TokenType.PLUS));
                 }
-                else if (Current() == "-") // Checking if the current character is a '-' operator. If it is, we advance and add a Token of TokenType.MINUS
+                else if (Current== "-") // Checking if the current character is a '-' operator. If it is, we advance and add a Token of TokenType.MINUS
                 {
                     Advance();
                     tokens.Add(new Token(TokenType.MINUS));
                 }
-                else if (Current() == "*") // Checking if the current character is a '*' operator
+                else if (Current== "*") // Checking if the current character is a '*' operator
                 {
                     Advance();
-                    if (Current() == "*") // Checking if the next charcter is also a '*' operator which converts it into a power operator.
+                    if (Current== "*") // Checking if the next charcter is also a '*' operator which converts it into a power operator.
                     {
                         Advance();
                         tokens.Add(new Token(TokenType.POWER));
@@ -88,17 +81,17 @@ namespace MathInterpreter
                     else // If it is and the next token is not a '*' character, we advance and add a Token of TokenType.MULTIPLY
                         tokens.Add(new Token(TokenType.MULTIPLY));
                 }
-                else if (Current() == "/") // Checking if the current character is a '/' operator. If it is, we advance and add a Token of TokenType.DIVIDE
+                else if (Current== "/") // Checking if the current character is a '/' operator. If it is, we advance and add a Token of TokenType.DIVIDE
                 {
                     Advance();
                     tokens.Add(new Token(TokenType.DIVIDE));
                 }
-                else if (Current() == "(") // Checking if the current character is a '(' operator. If it is, we advance and add a Token of TokenType.LPAREN
+                else if (Current== "(") // Checking if the current character is a '(' operator. If it is, we advance and add a Token of TokenType.LPAREN
                 {
                     Advance();
                     tokens.Add(new Token(TokenType.LPAREN));
                 }
-                else if (Current() == ")") // Checking if the current character is a ')' operator. If it is, we advance and add a Token of TokenType.RPAREN
+                else if (Current== ")") // Checking if the current character is a ')' operator. If it is, we advance and add a Token of TokenType.RPAREN
                 {
                     Advance();
                     tokens.Add(new Token(TokenType.RPAREN));
@@ -122,7 +115,7 @@ namespace MathInterpreter
                             errorIndex += 1;
                         }
                     }
-                    string errorTraceback = $"Error:\n{Text}\n{errorPointer}\nIllegal character '{Current()}'";
+                    string errorTraceback = $"Error:\n{Text}\n{errorPointer}\nIllegal character '{Current}'";
                     throw new Exception(errorTraceback);
                 }
             }
@@ -138,20 +131,20 @@ namespace MathInterpreter
         public Token GetNumber()
         {
             int decimal_point_count = 0;
-            if (Current() == ".")
+            if (Current== ".")
                 decimal_point_count += 1;
-            string number_str = Current(); // We initially store the number as a string.
+            string number_str = Current; // We initially store the number as a string.
             Advance();
 
-            while (Current() != "\0" && (DIGITS.Contains(Current()) || Current() == "."))
+            while (Current!= "\0" && (DIGITS.Contains(Current) || Current== "."))
             {
-                if (Current() == ".")
+                if (Current== ".")
                 {
                     decimal_point_count += 1;
                     if (decimal_point_count > 1)
                         break;
                 }
-                number_str += Current();
+                number_str += Current;
                 Advance();
             }
 

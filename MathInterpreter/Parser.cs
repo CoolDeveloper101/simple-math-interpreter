@@ -23,22 +23,14 @@ namespace MathInterpreter
         }
 
         /// <summary>
-        /// To increment the index of the current token from Parser.Tokens by 1
+        /// The current Token at which the parser is.
         /// </summary>
-        public void Advance()
-        {
-            Index += 1;
-        }
+        public Token Current => Tokens[Index];
 
         /// <summary>
-        /// To return the token at index Parser.Index from Parser.Tokens
+        /// To increment the index of the current token from Parser.Tokens by 1
         /// </summary>
-        /// <returns></returns>
-        public Token Current()
-        {
-            return Tokens[Index];
-        }
-
+        public void Advance() => Index += 1;
 
         /// <summary>
         /// This is the actual method which is used to convert a method to a list of tokens to a Node.
@@ -49,12 +41,12 @@ namespace MathInterpreter
             if (!Tokens.Contains(new Token(TokenType.EOF)))
                 throw new Exception("The list is not valid. It does not contain an EOF token.");
 
-            if (Current().Type == TokenType.EOF) // Checking if the list of tokens is empty. If it is empty, Parse returns an EmptyNode.
+            if (Current.Type == TokenType.EOF) // Checking if the list of tokens is empty. If it is empty, Parse returns an EmptyNode.
                 return new Node(NodeType.EmptyNode);
 
             Node result = Expr();
 
-            if (Current().Type != TokenType.EOF)
+            if (Current.Type != TokenType.EOF)
             {
                 if (Expression != "")
                     throw new Exception($"Invalid expression '{Expression}'");
@@ -68,14 +60,14 @@ namespace MathInterpreter
         {
             Node result = Term();
 
-            while (Current().Type != TokenType.EOF && (Current().Type == TokenType.PLUS || Current().Type == TokenType.MINUS))
+            while (Current.Type != TokenType.EOF && (Current.Type == TokenType.PLUS || Current.Type == TokenType.MINUS))
             {
-                if (Current().Type == TokenType.PLUS)
+                if (Current.Type == TokenType.PLUS)
                 {
                     Advance();
                     result = new Node(NodeType.AddNode, result, Term());
                 }
-                else if (Current().Type == TokenType.MINUS)
+                else if (Current.Type == TokenType.MINUS)
                 {
                     Advance();
                     result = new Node(NodeType.SubtractNode, result, Term());
@@ -89,14 +81,14 @@ namespace MathInterpreter
         {
             Node result = Exponent();
 
-            while (Current().Type != TokenType.EOF && (Current().Type == TokenType.MULTIPLY || Current().Type == TokenType.DIVIDE))
+            while (Current.Type != TokenType.EOF && (Current.Type == TokenType.MULTIPLY || Current.Type == TokenType.DIVIDE))
             {
-                if (Current().Type == TokenType.MULTIPLY)
+                if (Current.Type == TokenType.MULTIPLY)
                 {
                     Advance();
                     result = new Node(NodeType.MultiplyNode, result, Exponent());
                 }
-                else if (Current().Type == TokenType.DIVIDE)
+                else if (Current.Type == TokenType.DIVIDE)
                 {
                     Advance();
                     result = new Node(NodeType.DivideNode, result, Exponent());
@@ -109,9 +101,9 @@ namespace MathInterpreter
         {
             Node result = Factor();
 
-            while (Current().Type != TokenType.EOF && (Current().Type == TokenType.POWER))
+            while (Current.Type != TokenType.EOF && (Current.Type == TokenType.POWER))
             {
-                if (Current().Type == TokenType.POWER)
+                if (Current.Type == TokenType.POWER)
                 {
                     Advance();
                     result = new Node(NodeType.PowerNode, result, Factor());
@@ -123,13 +115,13 @@ namespace MathInterpreter
 
         public Node Factor()
         {
-            Token current = Current();
+            Token current = Current;
             if (current.Type == TokenType.LPAREN)
             {
                 Advance();
                 Node result = Expr();
 
-                if (Current().Type != TokenType.RPAREN)
+                if (Current.Type != TokenType.RPAREN)
                 {
                     if (Expression != "")
                         throw new Exception($"Invalid expression '{Expression}'");
