@@ -6,7 +6,7 @@ namespace MathInterpreter
     {
         public Number Visit(Node node)
         {
-            switch (node.NodeType)
+            switch (node.Type)
             {
                 case NodeType.NumberNode:
                     return new Number(node.Value);

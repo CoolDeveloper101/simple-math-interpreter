@@ -1,5 +1,3 @@
-using System;
-
 namespace MathInterpreter
 {
     /// <summary>
@@ -10,40 +8,40 @@ namespace MathInterpreter
         /// <summary>
         /// The type of the node
         /// </summary>
-        public readonly NodeType NodeType;
+        public readonly NodeType Type;
         /// <summary>
-        /// The value of the node if this.NodeType is a NumberNode
+        /// The value of the node if this.Type is a NumberNode
         /// </summary>
         public readonly double Value;
         /// <summary>
-        /// The first node if the this.NodeType is an operation such as NodeType.Addnode which has two parts.
+        /// The first node if the this.Type is an operation such as Type.Addnode which has two parts.
         /// </summary>
         public readonly Node NodeA;
         /// <summary>
-        /// The second node if the this.NodeType is an operation such as NodeType.Addnode which has two parts.
+        /// The second node if the this.Type is an operation such as Type.Addnode which has two parts.
         /// </summary>
         public readonly Node NodeB;
 
         /// <summary>
-        /// This is used for NumberNodes as they only have the NodeType and the Value
+        /// This is used for NumberNodes as they only have the Type and the Value
         /// </summary>
         /// <param name="nodeType"></param>
         /// <param name="value"></param>
         public Node(NodeType nodeType, double value)
         {
-            this.NodeType = nodeType;
+            this.Type = nodeType;
             Value = value;
         }
 
         /// <summary>
-        /// This constructor is used for operators since they have a NodeType and the values to the left and right of the NodeType.
+        /// This constructor is used for operators since they have a Type and the values to the left and right of the Type.
         /// </summary>
         /// <param name="nodeType"></param>
         /// <param name="nodeA"></param>
         /// <param name="nodeB"></param>
         public Node(NodeType nodeType, Node nodeA, Node nodeB)
         {
-            this.NodeType = nodeType;
+            this.Type = nodeType;
             NodeA = nodeA;
             NodeB = nodeB;
         }
@@ -55,7 +53,7 @@ namespace MathInterpreter
         /// <param name="nodeA"></param>
         public Node(NodeType nodeType, Node nodeA)
         {
-            this.NodeType = nodeType;
+            this.Type = nodeType;
             NodeA = nodeA;
         }
 
@@ -65,7 +63,7 @@ namespace MathInterpreter
         /// <param name="nodeType"></param>
         public Node(NodeType nodeType)
         {
-            this.NodeType = nodeType;
+            this.Type = nodeType;
         }
 
         /// <summary>
@@ -82,13 +80,13 @@ namespace MathInterpreter
             }
             else {
                 Node node = (Node) obj;
-                if (node.NodeType == NodeType.NumberNode)
+                if (node.Type == NodeType.NumberNode)
                     return Value == node.Value;
-                else if (node.NodeType == NodeType.PlusNode || node.NodeType == NodeType.MinusNode)
-                    return NodeType.Equals(node.NodeType) && NodeA.Equals(node.NodeA);
-                else if (node.NodeType == NodeType.EmptyNode)
-                    return NodeType.Equals(node.NodeType);
-                return NodeType.Equals(node.NodeType) && NodeA.Equals(node.NodeA) && NodeB.Equals(node.NodeB);
+                else if (node.Type == NodeType.PlusNode || node.Type == NodeType.MinusNode)
+                    return Type.Equals(node.Type) && NodeA.Equals(node.NodeA);
+                else if (node.Type == NodeType.EmptyNode)
+                    return Type.Equals(node.Type);
+                return Type.Equals(node.Type) && NodeA.Equals(node.NodeA) && NodeB.Equals(node.NodeB);
             }
         }
 
@@ -100,18 +98,18 @@ namespace MathInterpreter
         /// <returns>A string representation of the current node.</returns>
         public override string ToString()
         {
-            switch (this.NodeType)
+            return this.Type switch
             {
-                case NodeType.NumberNode: return $"{Value}";
-                case NodeType.PlusNode: return $"(+{NodeA})";
-                case NodeType.MinusNode: return $"(-{NodeA})";
-                case NodeType.AddNode: return $"({NodeA} + {NodeB})";
-                case NodeType.SubtractNode: return $"({NodeA} - {NodeB})";
-                case NodeType.MultiplyNode: return $"({NodeA} * {NodeB})";
-                case NodeType.DivideNode: return $"({NodeA} / {NodeB})";
-                case NodeType.PowerNode: return $"({NodeA} ** {NodeB})";
-                default: return "()";
-            }
+                NodeType.NumberNode => $"{Value}",
+                NodeType.PlusNode => $"(+{NodeA})",
+                NodeType.MinusNode => $"(-{NodeA})",
+                NodeType.AddNode => $"({NodeA} + {NodeB})",
+                NodeType.SubtractNode => $"({NodeA} - {NodeB})",
+                NodeType.MultiplyNode => $"({NodeA} * {NodeB})",
+                NodeType.DivideNode => $"({NodeA} / {NodeB})",
+                NodeType.PowerNode => $"({NodeA} ** {NodeB})",
+                _ => "()",
+            };
         }
     }
 
@@ -153,7 +151,7 @@ namespace MathInterpreter
         /// </summary>
         PowerNode,
         /// <summary>
-        /// If the list of the tokens is empty, the parser returns a node of type NodeType.EmptyNode
+        /// If the list of the tokens is empty, the parser returns a node of type Type.EmptyNode
         /// </summary>
         EmptyNode,
     }
