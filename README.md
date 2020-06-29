@@ -6,9 +6,9 @@ This is the new version of the math interpreter since it got extremely hard to u
 
 ## Credits
 Thanks to [CodePulse](https://www.youtube.com/channel/UCUVahoidFA7F3Asfvamrm7w) for the original project.
-He created the original interpreter in python and I basically converted to a c# project.
+He created the original interpreter in python and I basically converted to a C# project.
 You can find the original source code [here](https://github.com/davidcallanan/py-simple-math-interpreter).
-Thanks to the CodePulse for the project.
+Thanks to CodePulse for the project.
 
 ## Usage
 
