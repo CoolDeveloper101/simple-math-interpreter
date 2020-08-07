@@ -108,6 +108,7 @@ namespace MathInterpreter
                 NodeType.MultiplyNode => $"({NodeA} * {NodeB})",
                 NodeType.DivideNode => $"({NodeA} / {NodeB})",
                 NodeType.PowerNode => $"({NodeA} ** {NodeB})",
+                NodeType.FactorialNode => $"({NodeA}!)",
                 _ => "()",
             };
         }
@@ -147,9 +148,13 @@ namespace MathInterpreter
         /// </summary>
         DivideNode,
         /// <summary>
-        /// Used for the binary operator '*'
+        /// Used for the operator '**'
         /// </summary>
         PowerNode,
+        /// <summary>
+        /// Used for the operator '!'
+        /// </summary>
+        FactorialNode,
         /// <summary>
         /// If the list of the tokens is empty, the parser returns a node of type Type.EmptyNode
         /// </summary>
