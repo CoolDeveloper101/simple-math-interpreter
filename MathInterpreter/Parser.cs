@@ -41,7 +41,7 @@ namespace MathInterpreter
             if (!Tokens.Contains(new Token(TokenType.EOF)))
                 throw new Exception("The list is not valid. It does not contain an EOF token.");
 
-            if (Current.Type == TokenType.EOF) // Checking if the list of tokens is empty. If it is empty, Parse returns an EmptyNode.
+            else if (Current.Type == TokenType.EOF) // Checking if the list of tokens is empty. If it is empty, Parse returns an EmptyNode.
                 return new Node(NodeType.EmptyNode);
 
             Node result = Expr();
@@ -101,12 +101,17 @@ namespace MathInterpreter
         {
             Node result = Factor();
 
-            while (Current.Type != TokenType.EOF && (Current.Type == TokenType.POWER))
+            while (Current.Type != TokenType.EOF && (Current.Type == TokenType.POWER || Current.Type == TokenType.FACTORIAL))
             {
                 if (Current.Type == TokenType.POWER)
                 {
                     Advance();
                     result = new Node(NodeType.PowerNode, result, Factor());
+                }
+                else if (Current.Type == TokenType.FACTORIAL)
+                {
+                    Advance();
+                    result = new Node(NodeType.FactorialNode, result);
                 }
             }
 
