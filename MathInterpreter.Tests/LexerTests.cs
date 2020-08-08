@@ -53,9 +53,11 @@ namespace MathInterpreter.Tests
 			    new Token(TokenType.MINUS),
 			    new Token(TokenType.MULTIPLY),
 			    new Token(TokenType.DIVIDE),
+                new Token(TokenType.POWER),
+                new Token(TokenType.FACTORIAL),
                 new Token(TokenType.EOF),
             };
-            var lexer = new Lexer("+-*/");
+            var lexer = new Lexer("+-*/**!");
             var tokens = lexer.GetTokens();
 
             Assert.Equal(expexctedTokens, tokens);
@@ -93,9 +95,12 @@ namespace MathInterpreter.Tests
 			    new Token(TokenType.NUMBER, 51.0),
                 new Token(TokenType.POWER),
 			    new Token(TokenType.NUMBER, 2.0),
+                new Token(TokenType.PLUS),
+                new Token(TokenType.NUMBER, 5.0),
+                new Token(TokenType.FACTORIAL),
                 new Token(TokenType.EOF),
             };
-            var lexer = new Lexer("27 + (43 / 36 - 48) * 51 ** 2");
+            var lexer = new Lexer("27 + (43 / 36 - 48) * 51 ** 2 + 5!");
             var tokens = lexer.GetTokens();
 
             Assert.Equal(expexctedTokens, tokens);

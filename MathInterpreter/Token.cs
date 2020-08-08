@@ -93,6 +93,10 @@
         /// </summary>
         POWER,
         /// <summary>
+        /// The '(' operator will have the type TokenType.FACTORIAL
+        /// </summary>
+        FACTORIAL,
+        /// <summary>
         /// The '(' operator will have the type TokenType.LPAREN
         /// </summary>
         LPAREN,

@@ -86,6 +86,11 @@ namespace MathInterpreter
                     Advance();
                     tokens.Add(new Token(TokenType.DIVIDE));
                 }
+                else if (Current == '!') // Checking if the current character is a '/' operator. If it is, we advance and add a Token of TokenType.DIVIDE
+                {
+                    Advance();
+                    tokens.Add(new Token(TokenType.FACTORIAL));
+                }
                 else if (Current == '(') // Checking if the current character is a '(' operator. If it is, we advance and add a Token of TokenType.LPAREN
                 {
                     Advance();

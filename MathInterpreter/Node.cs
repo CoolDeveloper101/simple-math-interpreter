@@ -82,7 +82,7 @@ namespace MathInterpreter
                 Node node = (Node) obj;
                 if (node.Type == NodeType.NumberNode)
                     return Value == node.Value;
-                else if (node.Type == NodeType.PlusNode || node.Type == NodeType.MinusNode)
+                else if (node.Type == NodeType.PlusNode || node.Type == NodeType.MinusNode || node.Type == NodeType.FactorialNode)
                     return Type.Equals(node.Type) && NodeA.Equals(node.NodeA);
                 else if (node.Type == NodeType.EmptyNode)
                     return Type.Equals(node.Type);
@@ -108,6 +108,7 @@ namespace MathInterpreter
                 NodeType.MultiplyNode => $"({NodeA} * {NodeB})",
                 NodeType.DivideNode => $"({NodeA} / {NodeB})",
                 NodeType.PowerNode => $"({NodeA} ** {NodeB})",
+                NodeType.FactorialNode => $"({NodeA}!)",
                 _ => "()",
             };
         }
@@ -147,9 +148,13 @@ namespace MathInterpreter
         /// </summary>
         DivideNode,
         /// <summary>
-        /// Used for the binary operator '*'
+        /// Used for the operator '**'
         /// </summary>
         PowerNode,
+        /// <summary>
+        /// Used for the operator '!'
+        /// </summary>
+        FactorialNode,
         /// <summary>
         /// If the list of the tokens is empty, the parser returns a node of type Type.EmptyNode
         /// </summary>
