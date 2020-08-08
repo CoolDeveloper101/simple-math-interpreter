@@ -2,12 +2,19 @@ using System;
 using System.Collections.Generic;
 using MathInterpreter;
 using Xunit;
-
+using Xunit.Abstractions;
 
 namespace MathInterpreter.Tests
 {
     public class ParserTests
     {
+        private readonly ITestOutputHelper output;
+
+        public ParserTests(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
+
         [Fact]
         public void TestEmpty()
         {
@@ -64,6 +71,25 @@ namespace MathInterpreter.Tests
             Assert.Equal(expected, tree);
         }
 
+        [Fact]
+        public void TestFactorialOperator()
+        {
+            var expected = new Node(NodeType.FactorialNode,
+                new Node(NodeType.NumberNode, 10.0)
+            );
+
+            var input = new List<Token>()
+            {
+                new Token(TokenType.NUMBER, 10.0),
+                new Token(TokenType.FACTORIAL),
+                new Token(TokenType.EOF)
+            };
+
+            var parser = new Parser(input);
+            var tree = parser.Parse();
+            Assert.Equal(expected, tree);
+        }
+
         [Theory]
         [InlineData(NodeType.MinusNode, TokenType.MINUS, 32.56)]
         [InlineData(NodeType.PlusNode, TokenType.PLUS, 23.01)]
@@ -84,26 +110,28 @@ namespace MathInterpreter.Tests
         [Fact]
         public void TestAll()
         {
-            // This is a quite complicated and it should be the output if someone entererd the mathematical expression (1 - 34.21 * (-21.713)) + ((45.21 / 34.163) ** 56.12)
-            var expected = new Node(
-                NodeType.AddNode,
-                new Node(
-                    NodeType.SubtractNode,
+            // This is a quite complicated and it should be the output if someone entererd the mathematical expression (1 - 34.21 * (-21.713)) + (((45.21 / 34.163) ** 56.12) - (5!))
+            var expected = new Node(NodeType.AddNode,
+                new Node(NodeType.SubtractNode,
                     new Node(NodeType.NumberNode, 1.0),
-                    new Node(
-                        NodeType.MultiplyNode,
+                    new Node(NodeType.MultiplyNode,
                         new Node(NodeType.NumberNode, 34.21),
-                        new Node(NodeType.MinusNode, new Node(NodeType.NumberNode, 21.713))
+                        new Node(NodeType.MinusNode,
+                            new Node(NodeType.NumberNode, 21.713)
+                        )
                     )
                 ),
-                new Node(
-                    NodeType.PowerNode,
-                    new Node(
-                        NodeType.DivideNode,
-                        new Node(NodeType.NumberNode, 45.21),
-                        new Node(NodeType.NumberNode, 34.163)
+                new Node(NodeType.SubtractNode,
+                    new Node(NodeType.PowerNode,
+                        new Node(NodeType.DivideNode,
+                            new Node(NodeType.NumberNode, 45.21),
+                            new Node(NodeType.NumberNode, 34.163)
+                        ),
+                        new Node(NodeType.NumberNode, 56.12)
                     ),
-                    new Node(NodeType.NumberNode, 56.12)
+                    new Node(NodeType.FactorialNode,
+                        new Node(NodeType.NumberNode, 5.0)
+                    )
                 )
             );
             var input = new List<Token>()
@@ -119,12 +147,17 @@ namespace MathInterpreter.Tests
                 new Token(TokenType.PLUS),
                 new Token(TokenType.LPAREN),
                 new Token(TokenType.LPAREN),
+                new Token(TokenType.LPAREN),
                 new Token(TokenType.NUMBER, 45.21),
                 new Token(TokenType.DIVIDE),
                 new Token(TokenType.NUMBER, 34.163),
                 new Token(TokenType.RPAREN),
                 new Token(TokenType.POWER),
                 new Token(TokenType.NUMBER, 56.12),
+                new Token(TokenType.MINUS),
+                new Token(TokenType.NUMBER, 5.0),
+                new Token(TokenType.FACTORIAL),
+                new Token(TokenType.RPAREN),
                 new Token(TokenType.RPAREN),
                 new Token(TokenType.EOF),
             };
