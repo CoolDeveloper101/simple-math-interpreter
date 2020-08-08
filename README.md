@@ -15,6 +15,7 @@ Thanks to CodePulse for the project.
 The interpreter supports the following oprators in the given precedence-<br>
 **Brackets** : ( )<br>
 **Exponent** : \*\*<br>
+**Exponent** : !<br>
 **Division** : /<br>
 **Multiplication** : \*<br>
 **Addition** : +<br>
