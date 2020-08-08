@@ -50,9 +50,16 @@ namespace MathInterpreter
 
         public Number VisitFactorialNode(Node node)
         {
+            var nodeA = Visit(node.NodeA).Value;
+            // The factorial operator, unlike the other operators, can only handle whole numbers.
+            // That is why we check if it meets the nodeA meets criteria and throws an exception if it doesn't.
+            if (nodeA != (int)nodeA || nodeA < 0.0)
+            {
+                throw new Exception("Invalid value for the factorial operator.");
+            }
             // Since we defined an explicit conversion of double to Number, we cast the result to a Number.
             // We could use an implicit cast, but this improves readability as you can see what is going on.
-            return (Number)Factorial(Visit(node.NodeA));
+            return (Number)Factorial(nodeA);
         }
 
         public Number VisitPlusNode(Node node)
