@@ -82,7 +82,7 @@ namespace MathInterpreter
                 Node node = (Node) obj;
                 if (node.Type == NodeType.NumberNode)
                     return Value == node.Value;
-                else if (node.Type == NodeType.PlusNode || node.Type == NodeType.MinusNode)
+                else if (node.Type == NodeType.PlusNode || node.Type == NodeType.MinusNode || node.Type == NodeType.FactorialNode)
                     return Type.Equals(node.Type) && NodeA.Equals(node.NodeA);
                 else if (node.Type == NodeType.EmptyNode)
                     return Type.Equals(node.Type);
