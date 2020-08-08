@@ -12,8 +12,10 @@ on:
       - "**"
 
 jobs:
-  Build:
-
+  build:
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +29,6 @@ jobs:
       run: dotnet test
       working-directory: './MathInterpreter.Tests/'
     - name: Test console
-      run: dotnet build
+      run: dotnet build --configuration ${{ matrix.configuration }}
       working-directory: './MathInterpreter.console/'
       if: ${{ success() }}
