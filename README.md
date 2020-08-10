@@ -1,6 +1,6 @@
 # Simple Math Interpreter
 
-[![Build Status](https://github.com/CoolDeveloper101/simple-math-interpreter/workflows/Build/badge.svg)](https://github.com/CoolDeveloper101/simple-math-interpreter/actions)
+![build](https://github.com/CoolDeveloper101/simple-math-interpreter/workflows/build/badge.svg)
 
 This is the new version of the math interpreter since it got extremely hard to update and add new tests to it. So this is the same interpreter with a better structure so it is easier to maintain. You can find the original project [here](https://gitlab.com/CoolDeveloper101/math-interpreter).
 
