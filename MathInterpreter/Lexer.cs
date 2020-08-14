@@ -15,16 +15,7 @@ namespace MathInterpreter
         /// <remarks>
         /// Basically this property tells what character to access by indexing.
         /// </remarks>
-        public int Index { get; set; }
-        /// <summary>
-        /// Defining what kind of characters to skip.
-        /// </summary>
-        public const string WHITESPACE = " \t\n";
-        /// <summary>
-        /// These are the digits that numbers are comprised of.
-        /// </summary>
-        public const string DIGITS = "0123456789";
-
+        private int _position;
         /// <summary>
         /// The lexer takes a string as input.
         /// </summary>
@@ -37,12 +28,12 @@ namespace MathInterpreter
         /// <summary>
         /// The current character at which the lexer is.
         /// </summary>
-        public char Current => Text[Index];
+        private char Current => Text[_position];
 
         /// <summary>
-        /// This method adds 1 to the Lexer.Index variable so that the Lexer.Current method can return the next character from the property Lexer.Text.
+        /// This method adds 1 to the Lexer._position variable so that the Lexer.Current method can return the next character from the property Lexer.Text.
         /// </summary>
-        public void Advance() => Index += 1;
+        private void Advance() => _position++;
 
         /// <summary>
         /// This method is actually used to get the tokens from the string provided is the constructor.
@@ -53,10 +44,10 @@ namespace MathInterpreter
 
             while (Current != '\0') // Checking whether the current character is the null character which means we are at the end o fthe input.
             {
-                if (WHITESPACE.Contains(Current)) // Checking if the current token is space, tab or newline
+                if (char.IsWhiteSpace(Current)) // Checking if the current token is space, tab or newline
                     Advance(); // If the current token is in whitespace, we advance.
 
-                else if (DIGITS.Contains(Current) || Current == '.') // We are checking if the current character is a digit.
+                else if (char.IsDigit(Current) || Current == '.') // We are checking if the current character is a digit.
                 {
                     tokens.Add(GetNumber()); // If the current character is a digit, we call a method called GetNumber which converts the string to a NumberToken starting from the current character to the charcter which is not a digit or decimal point.
                 }
@@ -105,8 +96,8 @@ namespace MathInterpreter
                 {
                     var errorIndex = 0;
                     var errorPointer = "";
-                    while (errorIndex <= Index) {
-                        if (errorIndex < Index)
+                    while (errorIndex <= _position) {
+                        if (errorIndex < _position)
                         {
                             if (Text[errorIndex] == '\t')
                                 errorPointer += "\t";
@@ -114,7 +105,7 @@ namespace MathInterpreter
                                 errorPointer += " ";
                             errorIndex += 1;
                         }
-                        else if (errorIndex == Index)
+                        else if (errorIndex == _position)
                         {
                             errorPointer += "^";
                             errorIndex += 1;
@@ -141,7 +132,7 @@ namespace MathInterpreter
             string number_str = Current.ToString(); // We initially store the number as a string.
             Advance();
 
-            while (Current != '\0' && (DIGITS.Contains(Current) || Current == '.'))
+            while (Current != '\0' && (char.IsDigit(Current) || Current == '.'))
             {
                 if (Current == '.')
                 {
@@ -158,7 +149,7 @@ namespace MathInterpreter
             if (number_str.EndsWith('.'))
                 number_str += '0';
 
-            return new Token(TokenType.NUMBER, Convert.ToDouble(number_str)); // Converting the string number to a double.
+            return new Token(TokenType.NUMBER, double.Parse(number_str)); // Converting the string number to a double.
         }
     }
 }

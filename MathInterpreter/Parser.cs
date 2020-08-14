@@ -12,25 +12,25 @@ namespace MathInterpreter
         /// <summary>
         /// The index of the current token in the list of tokens.
         /// </summary>
-        public int Index {get; set;}
-        private readonly string Expression;
+        public int _position;
+        private readonly string _expression;
 
         public Parser(List<Token> tokens, string expression="")
         {
             Tokens = tokens;
-            Index = 0;
-            Expression = expression;
+            _position = 0;
+            _expression = expression;
         }
 
         /// <summary>
         /// The current Token at which the parser is.
         /// </summary>
-        public Token Current => Tokens[Index];
+        private Token Current => Tokens[_position];
 
         /// <summary>
         /// To increment the index of the current token from Parser.Tokens by 1
         /// </summary>
-        public void Advance() => Index += 1;
+        private void Advance() => _position++;
 
         /// <summary>
         /// This is the actual method which is used to convert a method to a list of tokens to a Node.
@@ -48,8 +48,8 @@ namespace MathInterpreter
 
             if (Current.Type != TokenType.EOF)
             {
-                if (Expression != "")
-                    throw new Exception($"Invalid expression '{Expression}'");
+                if (_expression != "")
+                    throw new Exception($"Invalid expression '{_expression}'");
                 throw new Exception($"The expression you have entered is not valid.");
             }
 
@@ -128,8 +128,8 @@ namespace MathInterpreter
 
                 if (Current.Type != TokenType.RPAREN)
                 {
-                    if (Expression != "")
-                        throw new Exception($"Invalid expression '{Expression}'");
+                    if (_expression != "")
+                        throw new Exception($"Invalid expression '{_expression}'");
                     throw new Exception($"The expression you have entered is not valid.");
                 }
 
@@ -152,8 +152,8 @@ namespace MathInterpreter
                 Advance();
                 return new Node(NodeType.MinusNode, Factor());
             }
-            if (Expression != "")
-                throw new Exception($"Invalid expression '{Expression}'");
+            if (_expression != "")
+                throw new Exception($"Invalid expression '{_expression}'");
             throw new Exception($"The expression you have entered is not valid.");
         }
     }
